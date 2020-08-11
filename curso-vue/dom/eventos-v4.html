@@ -3,7 +3,11 @@
 <div id="app">
     <p>{{ contador }}</p>
     <button v-on:click="somar(5, $event)">Somar 1</button>
-    <p v-on:mousemove="atualizarXY">Mouse: {{ x }} e {{ y }}</p>
+    <p v-on:mousemove="atualizarXY">Mouse: {{ x }} e {{ y }}
+        <span v-on:mousemove.stop="">PARAR AQUI!!!!</span>
+    </p>
+    <a v-on:click.prevent="" href="http://google.com">Google</a>
+    <a v-on:click="naoNavegar" href="http://google.com">Google</a>
 </div>
 
 <script>
@@ -19,9 +23,15 @@
                 console.log(passo, ev)
                 this.contador += passo
             },
-            atualizarXY(event){
+            atualizarXY(event) {
                 this.x = event.clientX
                 this.y = event.clientY
+            },
+            parar(event) {
+                event.stopPropagation()
+            },
+            naoNavegar(event) {
+                event.preventDefault()
             }
         }
     })
