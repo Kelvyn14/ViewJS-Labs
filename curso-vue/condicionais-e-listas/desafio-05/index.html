@@ -43,14 +43,22 @@
     (dica: use v-for e v-if na resolução) -->
   <h2>#04</h2>
   <ul>
-    <li v-for="(valor, chave, index) in aluno">
-      {{index + 1}} - {{chave}}:{{ chave != 'notas' ? valor : ''}}      
-        <ul v-if="chave == 'notas'">
-          <li v-for="(nota,i) in aluno.notas">
-            nota {{ i + 1 }} : {{ nota }}
+    <li v-for="valor in aluno">
+      <template v-if="!Array.isArray(valor)">
+        {{ valor }}
+      </template>
+      <template v-else>
+        Notas:
+        <ul>
+          <li v-for="nota in valor">
+            {{nota}}
           </li>
         </ul>
-      
+
+      </template>
+
+    </li>
+
     </li>
   </ul>
 </div>
